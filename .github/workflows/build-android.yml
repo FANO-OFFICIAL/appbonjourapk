@@ -28,11 +28,7 @@ jobs:
       run: npm install -g cordova
 
     - name: Set up Android SDK
-      uses: android-actions/setup-android@v2
-      with:
-        api-level: 30
-        target: android-30
-        arch: x86_64
+      uses: android-actions/setup-android@v3
 
     - name: Verify Cordova and Android versions
       run: |
