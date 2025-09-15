@@ -27,14 +27,29 @@ jobs:
     - name: Install Cordova
       run: npm install -g cordova
 
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-level: 30
+        target: android-30
+        arch: x86_64
+
+    - name: Verify Cordova and Android versions
+      run: |
+        cordova -v
+        cordova platforms
+
     - name: Add Android platform
-      run: cordova platform add android@10.1.2 # Using a specific version for better compatibility
+      run: cordova platform add android@10.1.2
+
+    - name: Clean Cordova platform
+      run: cordova clean android
 
     - name: Build Android App
-      run: cordova build android --release
+      run: cordova build android --release --verbose
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: app-release.apk
-        path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+        path: platforms/android/app/build/outputs/apk/release/*.apk
