@@ -30,6 +30,11 @@ jobs:
     - name: Install Cordova
       run: npm install -g cordova
 
+    - name: Set up Gradle 7.5
+      uses: gradle/wrapper-validation-action@v2
+      with:
+        gradle-version: '7.5'  # Forcer Gradle 7.5
+
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
 
